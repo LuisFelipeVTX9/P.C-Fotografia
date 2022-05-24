@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://kit.fontawesome.com/ca14b9e588.js" crossorigin="anonymous"></script>
+	<title> Modelo de site padrão 2</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+	<header>
+		<a href="#" class="logo"><span class="nome">P.C |</span><span class="sobrenome">Fotógrafo</span></a>
+		<nav>
+			<ul class="menu">
+				<li><a href="index.html">Início</a></li>
+				<li><a href="galeria.html">Galeria</a></li>
+				<li><a href="trabalhos.html">Trabalhos</a></li>
+				<li><a href="sobre.html">Sobre</a></li>
+				<li><a href="contato.html">Contato</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="box">
+		<h1>PAULO COSTA</h1>
+
+		<div class="slide">
+		<div class="slides">
+			
+			<div id="voltar" class="btn">
+				<i class="fas fa-chevron-left"></i>
+			</div>
+			<div id="next" class="btn">
+				<i class="fas fa-chevron-right"></i>
+			</div>
+
+			<div id="atual" class="images">
+				<img src="img/slideshow1.jpg">
+			</div>
+
+			<div class="images">
+				<img src="img/slideshow2.jpg">
+			</div>
+
+			<div class="images">
+				<img src="img/slideshow3.jpg">
+			</div>
+
+			<div class="images">
+				<img src="img/slideshow4.jpg">
+			</div>
+		</div>
+
+		<div class="balls">
+			<!--<div class="imgAtual" id="0"></div>
+			<div id="1"></div>
+			<div id="2"></div>
+			<div id="3"></div>-->
+		</div>
+	</div>
+	
+	</section>
+
+	<footer>
+		<span>Política de cookies</span>
+		<span>Política de privacidade</span>
+		<p>&copy; 2023 por Paulo Costa.</p>
+	</footer>
+
+	<script type="text/javascript">
+		var balls = document.querySelector('.balls')
+		var quant = document.querySelectorAll('.slides .images')
+		var atual = 0
+		var imagem = document.getElementById('atual')
+		var next = document.getElementById('next')
+		var voltar = document.getElementById('voltar')
+		var rolar = true
+
+		for(let i=0; i < quant.length; i++){
+			var div = document.createElement('div')
+			div.id = i
+			balls.appendChild(div)
+		}
+		document.getElementById('0').classList.add('imgAtual')
+
+		var pos = document.querySelectorAll('.balls div')
+
+		for(let i=0; i< pos.length; i++){
+			pos[i].addEventListener('click', function(){
+				atual = pos[i].id
+				rolar = false
+				slide()
+			})
+		}
+
+		voltar.addEventListener('click', ()=>{
+			atual--
+			rolar = false
+			slide()
+		})
+		next.addEventListener('click', ()=>{
+			atual++
+			rolar = false
+			slide()
+		})
+
+		function slide(){
+			if(atual >= quant.length){
+				atual = 0
+			}else if(atual < 0){
+				atual = quant.length-1
+			}
+			document.querySelector('.imgAtual').classList.remove('imgAtual')
+			imagem.style.marginLeft = -1024*atual+'px'
+			document.getElementById(atual).classList.add('imgAtual')
+		}
+		/*slide()*/
+		setInterval(()=>{
+			if(rolar){
+			atual++
+			slide()
+		}else{
+			rolar = true
+		}
+		},6000)
+	</script>
+</body>
+</html>
